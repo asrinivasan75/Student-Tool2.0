@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Summarizer</h1>
+        <form method="post" action="/">
+            <textarea name="input_text" placeholder="Enter text to summarize..." rows="10"></textarea>
+            <br>
+            <input type="submit" value="Summarize" id="summarize-btn">
+            <div class="loading-spinner" id="loading-spinner"></div>
+        </form>
+        {% if summary %}
+            <div class="summary">
+                <h2>Summary:</h2>
+                <p>{{ summary }}</p>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loading-spinner").hide();
+
+            $("#summarize-btn").click(function () {
+                $("#loading-spinner").show();
+            });
+
+            // If the page is refreshed, hide the loading spinner
+            $(window).on("load", function () {
+                $("#loading-spinner").hide();
+            });
+        });
+    </script>
+</body>
+</html>
